@@ -4,30 +4,60 @@ import 'package:new_app/controller/controller.dart';
 import 'package:new_app/model/cart_model.dart';
 import 'package:new_app/model/product_model.dart';
 
-class SingleCart extends StatelessWidget {
+class SingleCart extends StatefulWidget {
   SingleCart(this.products);
   Product? products;
+
+  @override
+  State<SingleCart> createState() => _SingleCartState();
+}
+
+class _SingleCartState extends State<SingleCart> {
   String? title;
+
   String? imageUrl;
-  String? price;
-  String? total;
+
+  num price = 0;
+
+  double total = 0;
+
+  int quantity = 0;
 
   MainController mainController = Get.put(MainController(), permanent: true);
 
   ProductModel? productData;
+  @override
+  void initState() {
+    loadData();
+    // TODO: implement initState
+    super.initState();
+  }
+
   void loadData() {
+    quantity = widget.products!.quantity!;
     productData = mainController.productData!
-        .firstWhere((element) => element.id == products!.productId);
+        .firstWhere((element) => element.id == widget.products!.productId);
     imageUrl = productData!.image;
     title = productData!.title;
-    price = productData!.price.toString();
-    var t = products!.quantity! * productData!.price!;
-    total = t.toString();
+    price = productData!.price as num;
+    total = widget.products!.quantity! * productData!.price!;
+  }
+
+  void addProduct() {
+    quantity = quantity + 1;
+    total = quantity * productData!.price!;
+
+    setState(() {});
+  }
+
+  void deleteProduct() {
+    quantity = quantity - 1;
+    total = quantity * productData!.price!;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    loadData();
     return Card(
       elevation: .5,
       child: Container(
@@ -47,7 +77,7 @@ class SingleCart extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -62,14 +92,14 @@ class SingleCart extends StatelessWidget {
                       ),
                       Text(
                         price.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.purple),
                       ),
                       Text(
                         total.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.purple),
@@ -93,9 +123,13 @@ class SingleCart extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.remove),
-                      Text(products!.quantity.toString()),
-                      Icon(Icons.add)
+                      if (quantity < 2) const SizedBox(),
+                      if (quantity > 1)
+                        InkWell(
+                            onTap: () => deleteProduct(),
+                            child: Icon(Icons.remove)),
+                      Text(quantity.toString()),
+                      InkWell(onTap: () => addProduct(), child: Icon(Icons.add))
                     ],
                   ),
                 ),

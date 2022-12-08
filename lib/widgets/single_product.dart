@@ -75,20 +75,20 @@ class SingleProduct extends StatelessWidget {
                   )
                 ]),
           ),
-          Container(
-            height: 30,
-            constraints: BoxConstraints(maxWidth: 130),
-            decoration: BoxDecoration(
-                color: const Color(0xffFFCCE4),
-                borderRadius: BorderRadius.circular(50)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Icon(Icons.remove), Text('5'), Icon(Icons.add)],
-              ),
-            ),
-          )
+          // Container(
+          //   height: 30,
+          //   constraints: BoxConstraints(maxWidth: 130),
+          //   decoration: BoxDecoration(
+          //       color: const Color(0xffFFCCE4),
+          //       borderRadius: BorderRadius.circular(50)),
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [Icon(Icons.remove), Text('5'), Icon(Icons.add)],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
