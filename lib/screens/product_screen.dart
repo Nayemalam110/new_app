@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/controller/controller.dart';
 import 'package:new_app/model/product_model.dart';
+import 'package:new_app/screens/cart_screen.dart';
 import 'package:new_app/service/service_request.dart';
 import 'package:new_app/widgets/single_product.dart';
 
@@ -13,6 +15,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   TextEditingController editingController = TextEditingController();
+  MainController mainController = Get.put(MainController(), permanent: true);
 
   List<ProductModel> productData = [];
   List<ProductModel> searchList = [];
@@ -45,11 +48,8 @@ class _ProductScreenState extends State<ProductScreen> {
       productData = value!;
       items = productData;
       obxList.value = productData;
-      setState(() {
-        setState(() {
-          flag.value = false;
-        });
-      });
+
+      flag.value = false;
     });
   }
 
@@ -73,6 +73,14 @@ class _ProductScreenState extends State<ProductScreen> {
               suffixIcon: Icon(Icons.search),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          TextButton(
+              onPressed: () {
+                Get.to(() => CartScreen());
+              },
+              child: Text("Cart Screen")),
           SizedBox(
             height: 30,
           ),
