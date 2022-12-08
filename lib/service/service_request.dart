@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:new_app/model/product_model.dart';
 
@@ -36,6 +38,36 @@ class ServiceRequest {
         print(productList.length);
 
         return productList;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  //login
+
+  Future<String?> logIn(userName, password) async {
+    var url = Uri.parse("${apiUrl}auth/login");
+
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          "username": userName,
+          "password": password,
+        }),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var token = response.body;
+
+        return token;
+      } else {
+        return null;
       }
     } catch (e) {
       print(e);
