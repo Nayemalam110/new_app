@@ -20,7 +20,6 @@ class ServiceRequest {
       if (response.statusCode == 200) {
         var jsonString = response.body;
         var productList = productModelFromJson(jsonString);
-        print(productList.length);
 
         return productList;
       }
@@ -77,7 +76,6 @@ class ServiceRequest {
       }
     } catch (e) {
       print(e);
-      return null;
     }
   }
 }

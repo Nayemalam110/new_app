@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/controller/controller.dart';
+import 'package:new_app/model/cart_model.dart';
 import 'package:new_app/model/product_model.dart';
 import 'package:new_app/screens/cart_screen.dart';
 import 'package:new_app/service/service_request.dart';
@@ -76,11 +77,22 @@ class _ProductScreenState extends State<ProductScreen> {
           SizedBox(
             height: 20,
           ),
-          TextButton(
-              onPressed: () {
-                Get.to(() => CartScreen());
-              },
-              child: Text("Cart Screen")),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    mainController
+                        .addToCart(CartModel(id: 2, userId: 1, products: []));
+                  },
+                  child: Text("Hit Me")),
+              TextButton(
+                  onPressed: () {
+                    Get.to(() => CartScreen());
+                  },
+                  child: Text("Cart Screen")),
+            ],
+          ),
           SizedBox(
             height: 30,
           ),
