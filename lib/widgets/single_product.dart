@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/controller/controller.dart';
+import 'package:new_app/model/cart_model.dart';
+import 'package:new_app/model/new_cart_model.dart';
 import 'package:new_app/model/product_model.dart';
 
 class SingleProduct extends StatelessWidget {
   SingleProduct(this.productData);
   ProductModel productData;
+  var quantity = 0;
 
   MainController mainController = Get.put(MainController());
+
+  void addProduct() {
+    quantity = quantity + 1;
+    //  total = quantity * productData!.price!;
+
+    // setState(() {});
+  }
+
+  void deleteProduct() {
+    quantity = quantity - 1;
+    //  total = quantity * productData!.price!;
+    // setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +101,21 @@ class SingleProduct extends StatelessWidget {
           //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
           //     child: Row(
           //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: [Icon(Icons.remove), Text('5'), Icon(Icons.add)],
+          //       children: [
+          //         if (quantity < 2) const SizedBox(),
+          //         if (quantity > 1)
+          //           InkWell(
+          //               onTap: () =>
+          //                   mainController.removeSingleItem(productData.id),
+          //               child: Icon(Icons.remove)),
+          //         Text(quantity.toString()),
+          //         InkWell(
+          //             onTap: () => mainController.addItem(
+          //                 productData.id.toString(),
+          //                 productData.price as num,
+          //                 productData.title!),
+          //             child: Icon(Icons.add))
+          //       ],
           //     ),
           //   ),
           // )

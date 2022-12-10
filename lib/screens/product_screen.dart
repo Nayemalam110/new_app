@@ -80,12 +80,11 @@ class _ProductScreenState extends State<ProductScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () {
-                    mainController
-                        .addToCart(CartModel(id: 2, userId: 1, products: []));
-                  },
-                  child: Text("Hit Me")),
+              // TextButton(
+              //     onPressed: () {
+              //       ;
+              //     },
+              //     child: Text("Hit Me")),
               TextButton(
                   onPressed: () {
                     Get.to(() => CartScreen());
